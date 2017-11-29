@@ -1,3 +1,15 @@
+<?php 
+include("/classes/Categorie.php");
+include("/classes/Produit.php");
+@$id = $_GET['id'];
+
+
+	$cat= new Categorie();
+  $liste = $cat->liste();
+          				foreach($liste as $data )
+          				{
+						if($data->_id==$id){
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +27,9 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>%NOM_CATEGORIE%</h2>
+						<h2><?php echo $data->_libelle ?></h2>
 						<div class="panel-group category-products" id="accordian">
-							%Ceci est la description de la catégories sélectionnée.%
+							<?php echo $data->_description ?>
 						</div>
 						
 
@@ -28,25 +40,41 @@
 				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Les produits de la catégorie %NOM_CATEGORIE%</h2>
+						<h2 class="title text-center">Les produits de la catégorie <?php echo $data->_libelle; }} ?> </h2>
+
+
+
+
+						<?php
+			
+
+				$prod= new Produit();
+				$prod->_id = $id;
+	            $prod = $prod->liste();
+
+	            foreach($prod as $info )
+                      {
+if($info->_id_category==$id){
+				?>
 						
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="images/bakery.jpg" alt="" />
-										<h2>999 TND</h2>
-										<p>%NOM PRODUIT%</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+										<img src="upload/<?php echo $info->_image; ?>"  alt="" />
+										
+										<a href="panier_ajouter.php?id=<?php echo $info->_id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
 											Ajouter au panier
 										</a>
 									</div>
 									<div class="product-overlay">
 										<div class="overlay-content">
-											<p>%DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... %</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
-												Ajouter au panier
-											</a>
+											<p><?php echo $info->_description; ?></p>
+										<h2><?php echo $info->_prix; ?>dt</h2>
+										<p><?php echo $info->_libelle; ?></p>
+										<a href="panier_ajouter.php?id=<?php echo $info->_id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+											Ajouter au panier
+										</a>
 										</div>
 
 									</div>										
@@ -54,30 +82,7 @@
 							</div>
 						</div>
 
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/bakery.jpg" alt="" />
-										<h2>999 TND</h2>
-										<p>%NOM PRODUIT%</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
-											Ajouter au panier
-										</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<p>%DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... DESCRIPTION PRODUIT ... %</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
-												Ajouter au panier
-											</a>
-										</div>
-
-									</div>										
-								</div>
-							</div>
-						</div>
-
+<?php } }?>
 						
 					</div><!--features_items-->
 					

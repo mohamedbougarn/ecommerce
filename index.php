@@ -31,17 +31,7 @@
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Les catégories de produits</h2>
 						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="images/bakery.jpg" alt="" />
-											<a href="produits.php" class="btn btn-default add-to-cart">%Nom Cat 1%</a>
-										</div>
-								</div>
-							</div>
-						</div>
-
+						
 
 
 						 <?php 
@@ -56,8 +46,8 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="images/<?php echo $data->_image; ?>""  alt="" />
-											<a href="produits.php" class="btn btn-default add-to-cart"><?php echo $data->_libelle; ?></a>
+											<img src="images/<?php echo $data->_image; ?>" alt="" />
+											<a href="produits.php?id=<?php echo $data->_id ?>" class="btn btn-default add-to-cart"><?php echo $data->_libelle; ?></a>
 										</div>
 								</div>
 							</div>

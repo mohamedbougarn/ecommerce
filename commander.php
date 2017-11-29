@@ -6,7 +6,9 @@
 </head><!--/head-->
 
 <body>
-	<?php require_once("header.php") ?>
+	<?php require_once("header.php") 
+
+	?>
 	
 	<section id="cart_items">
 		<div class="container">
@@ -28,13 +30,21 @@
 						<div class="col-sm-12">
 							<div class="signup-form"><!--sign up form-->
 								<h2>Créer un nouveau compte</h2>
-								<form action="paiement.php">
-									<input type="text" placeholder="Votre nom & prénom"/>
-									<input type="email" placeholder="Email Address"/>
-									<input type="text" placeholder="Adresse"/>
-									<button type="submit" class="btn btn-default">
+								<form action="commander_action.php" method="POST">
+									<input type="text" placeholder="Votre nom & prénom" name='nom' id='nom'/>
+									<input type="email" placeholder="Email Address" name='email' id='email'/>
+									<input type="text" placeholder="Adresse" name='adress' id='adress'/>
+									
+									<?php if( !empty($id) ) { ?>
+     								<input type="hidden" name="id" value="<?php echo $id; ?>" />
+     								<?php $id_prod=$_GET['id'];?>
+     								<input type="hidden" name="id_prod" value="<?php echo $id_prod; ?>" />
+     								<?php } ?>
+
+     								<button type="submit" class="btn btn-default">
 										Paiement 
 									</button>
+									
 								</form>
 								<p></p>
 							</div><!--/sign up form-->

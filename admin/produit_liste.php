@@ -22,7 +22,7 @@ require_once("../classes/produit.php");
   <div class="container2">
     <h1>Liste des produit
       :
-      <a type="button" class="btn btn-primary btn-lg pull-right" href="categorie_new.php">
+      <a type="button" class="btn btn-primary btn-lg pull-right" href="produit_new.php">
       Ajouter une produit </a>	  </h1>
     </div>
 
@@ -35,7 +35,10 @@ require_once("../classes/produit.php");
         <thead> 
           <tr>
             <th>Id</th>
+            
             <th>Libelle</th>
+           <th>PRIX</th>
+           
             <th>MODIFIER</th>
             <th>SUPPRIMER</th>
           </tr>
@@ -52,6 +55,10 @@ require_once("../classes/produit.php");
            <tr>
             <td><?php echo $data->_id; ?></td>
             <td><?php echo $data->_libelle; ?></td>
+            <td><?php echo $data->_prix; ?></td>
+            
+
+
             <td>
               <a class="btn btn-primary" href="produit_new.php?id=<?php echo $data->_id; ?>">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>  Modifier

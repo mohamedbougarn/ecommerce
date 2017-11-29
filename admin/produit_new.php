@@ -1,6 +1,6 @@
 <?php 
 require_once('verifier_access.php'); 
-
+require_once("../classes/Categorie.php");
 @$id = $_GET['id'];
 
 if( !empty($id) ) {
@@ -37,7 +37,7 @@ if( !empty($id) ) {
 
    <div class="clear"><p>&nbsp;</p></div>
    <div id="resultat-bien"></div>
-   <form id="form_bien" class="form_valid" method="POST" action="categorie_new_action.php" enctype="multipart/form-data">
+   <form id="form_bien" class="form_valid" method="POST" action="produit_new_action.php" enctype="multipart/form-data">
 
     <table class="tab_diapo" border="0">
       <tr>
@@ -65,24 +65,59 @@ if( !empty($id) ) {
           Image : <span style="color:red;">*</span>            </th>
           <td><input type="file" name="image" id="image" /></td>
         </tr>
-
-        <tr>
-          <th>Description :<span style="color:red;">*</span> </th>
-          <td>
-            <textarea required name="description" class="textarea" style="width: 810px; height: 200px" >
-             <?php echo @$cat->_description; ?>
-           </textarea>
-         </td>
-       </tr>
-
-        <tr>
+       <tr>
         <th>
          Prix :<span style="color:red;">*</span>            
         </th>
         <td>
-          <input required type="text" name="libelle" id="prix" validate="required" value="<?php echo @($prd->_prix); ?>" />
+          <input required type="text" name="prix" id="prix" validate="required" value="<?php echo @($prd->_prix); ?>" />
         </td>
       </tr>
+        <tr>
+          <th>Description :<span style="color:red;">*</span> </th>
+          <td>
+            <textarea required name="description" class="textarea" style="width: 810px; height: 200px" >
+             <?php echo @$prd->_description; ?>
+           </textarea>
+         </td>
+       </tr>
+       
+       
+
+       <tr>
+          <th>
+            category :<span style="color:red;">*</span> 
+          </th>
+           <td>
+
+
+        <select name="id_category" id="id_category">
+        <?php
+
+        $cat = new Categorie(); 
+        $liste = $cat->liste();
+        foreach($liste as $data )
+
+
+        {
+          ?>
+
+          <option value= "<?php echo $data->_id  ?>">
+            <?php echo $data->_libelle;?>
+          </option>
+
+        
+
+
+      <?php } ?>
+          
+        </select>
+        </td>
+
+      </tr>
+
+
+
      </table>
 
      <?php if( !empty($id) ) { ?>

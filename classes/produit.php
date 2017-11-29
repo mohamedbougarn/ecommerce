@@ -7,13 +7,16 @@ class produit extends Mysql
 	private $_libelle;
 	private $_description;
 	private $_image;
+	private $_prix;
+	private $_id_category;
+
 
 	// Méthode magique pour les setters & getters
 	public function __get($attribut) {
 		if (property_exists($this, $attribut)) 
-                return ( $this->$attribut ); 
+                return htmlentities( $this->$attribut ); 
         else
-			exit("Erreur dans la calsse " . __CLASS__ . " : l'attribut $property n'existe pas!");     
+			exit("Erreur dans la calsse " . __CLASS__ . " : l'attribut $attribut n'existe pas!");     
     }
 
     public function __set($attribut, $value) {
@@ -21,7 +24,7 @@ class produit extends Mysql
             $this->$attribut = (mysqli_real_escape_string($this->get_cnx(), $value)) ;
         }
         else
-        	exit("Erreur dans la calsse " . __CLASS__ . " : l'attribut $property n'existe pas!");
+        	exit("Erreur dans la calsse " . __CLASS__ . " : l'attribut  $attribut n'existe pas!");
     }
 
 	public function details($id)
@@ -36,7 +39,7 @@ class produit extends Mysql
 		$prd->_image 		= $row['image'];
 		$prd->_description	= $row['description'];
 		$prd->_prix           =$row['prix'];
-		$prd->_id_category           =$row['_id_category'];
+		$prd->_id_category           =$row['id_categorie'];
 	
 		return $prd;
 	}
@@ -54,10 +57,10 @@ class produit extends Mysql
 		$prd->_libelle 		= $row['libelle'];
 		$prd->_image 		= $row['image'];
 		$prd->_description	= $row['description'];
-		$prd->_prix           =$row['prix'];
-		$prd->_id_category           =$row['_id_category'];
+		$prd->_prix         =$row['prix'];
+		$prd->_id_category  =$row['id_categorie'];
 	
-		return $prd;
+		$list_prd[]=$prd;
 	}
 		
 		return $list_prd;
@@ -65,9 +68,9 @@ class produit extends Mysql
 	
 	public function ajouter()
 	{
-	    $q = "INSERT INTO produit(id, libelle, image, description,prix,id_category) VALUES 
+	    $q = "INSERT INTO produit(id, libelle, image, description,prix,id_categorie) VALUES 
 	  		(  null				, '$this->_libelle'		,
-			  '$this->_image'	, '$this->_description' , '$this->prix', '$this->id_category'	
+			  '$this->_image'	, '$this->_description' , '$this->_prix', '$this->_id_category'	
 			)";
 		$res = $this->requete($q);
 		return mysqli_insert_id($this->get_cnx());
@@ -79,7 +82,7 @@ class produit extends Mysql
 			  image = IF('$this->_image' = '', image, '$this->_image') ,
 			  description = '$this->_description',
 			  			  prix = '$this->_prix',
-			  			  			  id_category = '$this->_id_category'
+			  			  			  id_categorie = '$this->_id_category'
 
 
 			  WHERE id = '$this->_id' ";
