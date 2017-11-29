@@ -54,6 +54,12 @@ require_once('verifier_access.php');
         </th>
             <td><?php echo $data->_id; ?></td>
         </tr>
+         <tr>
+        <th>
+          date du commande :<span style="color:red;"></span>            
+        </th>
+            <td><?php echo $data->_date_cm; ?></td>
+        </tr>
         <tr>
         <th>
           Nom et Prénom :<span style="color:red;"></span>            
